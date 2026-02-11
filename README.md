@@ -306,6 +306,18 @@ GET /users?fields=id,name&join=profile||email
 | `routes` | `object` | No | Enable/disable specific routes |
 | `crudOptions` | `CrudOptions` | No | Additional @dataui/crud options |
 
+## Testing
+
+The package includes comprehensive tests with >97% coverage:
+
+```bash
+npm test                # Run all tests
+npm run test:watch      # Run tests in watch mode
+npm run test:coverage   # Run tests with coverage report
+```
+
+See [test/README.md](test/README.md) for detailed testing documentation.
+
 ## License
 
 MIT

@@ -2,23 +2,8 @@ import { Type, CanActivate, ExceptionFilter, NestInterceptor } from '@nestjs/com
 import { CrudOptions } from '@dataui/crud';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { ObjectLiteral } from 'typeorm';
-
-/**
- * Base DTO type - any class with a constructor
- */
-export type DtoType = new (...args: unknown[]) => object;
-
-/**
- * Route names type for enabling/disabling routes
- */
-export type CrudRouteName =
-  | 'getManyBase'
-  | 'getOneBase'
-  | 'createOneBase'
-  | 'createManyBase'
-  | 'updateOneBase'
-  | 'replaceOneBase'
-  | 'deleteOneBase';
+import { DtoType } from '../types/dto.type';
+import { CrudRouteName } from '../types/crud-route-name.type';
 
 /**
  * Configuration options for CRUD module

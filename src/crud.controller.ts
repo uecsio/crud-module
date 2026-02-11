@@ -2,7 +2,7 @@ import { Controller, Type, UseGuards, UseFilters, UseInterceptors } from '@nestj
 import { Crud, CrudController, CrudOptions } from '@dataui/crud';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { ObjectLiteral } from 'typeorm';
-import { CrudModuleOptions } from './interfaces/crud-options.interface';
+import { CrudModuleOptions } from './interfaces/crud-module-options.interface';
 
 /**
  * Factory function to create a CRUD controller for a given entity

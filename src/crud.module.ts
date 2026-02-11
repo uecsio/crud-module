@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ObjectLiteral } from 'typeorm';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { CrudController } from '@dataui/crud';
-import { CrudModuleOptions } from './interfaces/crud-options.interface';
+import { CrudModuleOptions } from './interfaces/crud-module-options.interface';
 import { createCrudService } from './crud.service';
 import { createCrudController } from './crud.controller';
 

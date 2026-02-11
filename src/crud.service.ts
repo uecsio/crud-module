@@ -2,11 +2,7 @@ import { Injectable, Type } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ObjectLiteral } from 'typeorm';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
-
-/**
- * Type for the CRUD service constructor
- */
-export type CrudServiceType<Entity extends ObjectLiteral> = Type<TypeOrmCrudService<Entity>>;
+import { CrudServiceType } from './types/crud-service.type';
 
 /**
  * Factory function to create a CRUD service for a given entity

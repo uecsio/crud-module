@@ -1,15 +1,14 @@
 // Main module
 export { CrudModule } from './crud.module';
 
-// Interfaces and types
-export {
-  CrudModuleOptions,
-  DtoType,
-  CrudRouteName,
-} from './interfaces/crud-options.interface';
+// Interfaces
+export * from './interfaces';
 
-// Factory functions and types
-export { createCrudService, CrudServiceType } from './crud.service';
+// Types
+export * from './types';
+
+// Factory functions
+export { createCrudService } from './crud.service';
 export { createCrudController } from './crud.controller';
 
 // Re-export from @dataui/crud for convenience
