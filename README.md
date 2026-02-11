@@ -1,5 +1,10 @@
 # NestJS CRUD Module
 
+[![CI](https://github.com/your-org/nestjs-crud-module/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/nestjs-crud-module/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/your-org/nestjs-crud-module/branch/main/graph/badge.svg)](https://codecov.io/gh/your-org/nestjs-crud-module)
+[![npm version](https://badge.fury.io/js/@your-org%2Fnestjs-crud-module.svg)](https://badge.fury.io/js/@your-org%2Fnestjs-crud-module)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A dynamic CRUD module for NestJS with TypeORM, based on [@dataui/crud](https://github.com/gid-oss/dataui-nestjs-crud). This package simplifies the creation of RESTful CRUD endpoints by providing a configurable module that accepts TypeORM entities, DTOs, guards, and filters.
 
 ## Features

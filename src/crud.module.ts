@@ -14,9 +14,7 @@ export class CrudModule {
    * @param options Configuration options for the CRUD module
    * @returns DynamicModule
    */
-  static register<Entity extends ObjectLiteral>(
-    options: CrudModuleOptions<Entity>,
-  ): DynamicModule {
+  static register<Entity extends ObjectLiteral>(options: CrudModuleOptions<Entity>): DynamicModule {
     // Create or use provided service
     const ServiceClass = options.service || createCrudService(options.entity);
 
