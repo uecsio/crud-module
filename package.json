@@ -1,0 +1,47 @@
+{
+  "name": "@your-org/nestjs-crud-module",
+  "version": "1.0.0",
+  "description": "Dynamic CRUD module for NestJS with TypeORM, based on @dataui/crud",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "jest"
+  },
+  "keywords": [
+    "nestjs",
+    "crud",
+    "typeorm",
+    "rest",
+    "api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "@dataui/crud": "^5.0.0",
+    "@dataui/crud-typeorm": "^5.0.0",
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "typeorm": "^0.3.0",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.0"
+  },
+  "devDependencies": {
+    "@dataui/crud": "^5.0.0",
+    "@dataui/crud-typeorm": "^5.0.0",
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "@types/node": "^20.0.0",
+    "typeorm": "^0.3.0",
+    "typescript": "^5.0.0",
+    "class-validator": "^0.14.0",
+    "class-transformer": "^0.5.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
