@@ -1,10 +1,29 @@
-import { Type } from '@nestjs/common';
+import { Type, CanActivate, ExceptionFilter, NestInterceptor } from '@nestjs/common';
 import { CrudOptions } from '@dataui/crud';
+import { TypeOrmCrudService } from '@dataui/crud-typeorm';
+import { ObjectLiteral } from 'typeorm';
+
+/**
+ * Base DTO type - any class with a constructor
+ */
+export type DtoType = new (...args: unknown[]) => object;
+
+/**
+ * Route names type for enabling/disabling routes
+ */
+export type CrudRouteName =
+  | 'getManyBase'
+  | 'getOneBase'
+  | 'createOneBase'
+  | 'createManyBase'
+  | 'updateOneBase'
+  | 'replaceOneBase'
+  | 'deleteOneBase';
 
 /**
  * Configuration options for CRUD module
  */
-export interface CrudModuleOptions<Entity = any> {
+export interface CrudModuleOptions<Entity extends ObjectLiteral = ObjectLiteral> {
   /**
    * TypeORM Entity class
    */
@@ -13,32 +32,32 @@ export interface CrudModuleOptions<Entity = any> {
   /**
    * DTO for creating entity
    */
-  createDto?: Type<any>;
+  createDto?: DtoType;
 
   /**
    * DTO for updating entity
    */
-  updateDto?: Type<any>;
+  updateDto?: DtoType;
 
   /**
    * DTO for replacing entity
    */
-  replaceDto?: Type<any>;
+  replaceDto?: DtoType;
 
   /**
    * Guards to apply to CRUD controller
    */
-  guards?: Array<Type<any>>;
+  guards?: Array<Type<CanActivate>>;
 
   /**
    * Filters to apply to CRUD controller
    */
-  filters?: Array<Type<any>>;
+  filters?: Array<Type<ExceptionFilter>>;
 
   /**
    * Interceptors to apply to CRUD controller
    */
-  interceptors?: Array<Type<any>>;
+  interceptors?: Array<Type<NestInterceptor>>;
 
   /**
    * Controller route path
@@ -53,13 +72,13 @@ export interface CrudModuleOptions<Entity = any> {
   /**
    * Custom service class (must extend TypeOrmCrudService)
    */
-  service?: Type<any>;
+  service?: Type<TypeOrmCrudService<Entity>>;
 
   /**
    * Enable/disable specific routes
    */
   routes?: {
-    only?: Array<'getManyBase' | 'getOneBase' | 'createOneBase' | 'createManyBase' | 'updateOneBase' | 'replaceOneBase' | 'deleteOneBase'>;
-    exclude?: Array<'getManyBase' | 'getOneBase' | 'createOneBase' | 'createManyBase' | 'updateOneBase' | 'replaceOneBase' | 'deleteOneBase'>;
+    only?: Array<CrudRouteName>;
+    exclude?: Array<CrudRouteName>;
   };
 }

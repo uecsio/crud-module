@@ -1,6 +1,8 @@
 import { DynamicModule, Module, Type } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ObjectLiteral } from 'typeorm';
+import { TypeOrmCrudService } from '@dataui/crud-typeorm';
+import { CrudController } from '@dataui/crud';
 import { CrudModuleOptions } from './interfaces/crud-options.interface';
 import { createCrudService } from './crud.service';
 import { createCrudController } from './crud.controller';
@@ -12,11 +14,11 @@ export class CrudModule {
    * @param options Configuration options for the CRUD module
    * @returns DynamicModule
    */
-  static register<Entity extends ObjectLiteral = any>(
+  static register<Entity extends ObjectLiteral>(
     options: CrudModuleOptions<Entity>,
   ): DynamicModule {
     // Create or use provided service
-    const ServiceClass = options.service || createCrudService(options.entity as new () => Entity);
+    const ServiceClass = options.service || createCrudService(options.entity);
 
     // Create controller with all configurations
     const ControllerClass = createCrudController(options, ServiceClass);
@@ -35,16 +37,16 @@ export class CrudModule {
    * @param optionsArray Array of configuration options
    * @returns DynamicModule
    */
-  static registerMany(
-    optionsArray: CrudModuleOptions[],
+  static registerMany<Entity extends ObjectLiteral>(
+    optionsArray: Array<CrudModuleOptions<Entity>>,
   ): DynamicModule {
-    const controllers: Type<any>[] = [];
-    const providers: Type<any>[] = [];
-    const entities: Type<any>[] = [];
+    const controllers: Array<Type<CrudController<Entity>>> = [];
+    const providers: Array<Type<TypeOrmCrudService<Entity>>> = [];
+    const entities: Array<Type<Entity>> = [];
 
     for (const options of optionsArray) {
       // Create or use provided service
-      const ServiceClass = options.service || createCrudService(options.entity as any);
+      const ServiceClass = options.service || createCrudService(options.entity);
 
       // Create controller with all configurations
       const ControllerClass = createCrudController(options, ServiceClass);

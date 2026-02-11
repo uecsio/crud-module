@@ -1,13 +1,15 @@
 import { Controller, Type, UseGuards, UseFilters, UseInterceptors } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@dataui/crud';
+import { TypeOrmCrudService } from '@dataui/crud-typeorm';
+import { ObjectLiteral } from 'typeorm';
 import { CrudModuleOptions } from './interfaces/crud-options.interface';
 
 /**
  * Factory function to create a CRUD controller for a given entity
  */
-export function createCrudController<Entity>(
+export function createCrudController<Entity extends ObjectLiteral>(
   options: CrudModuleOptions<Entity>,
-  service: any,
+  ServiceClass: Type<TypeOrmCrudService<Entity>>,
 ): Type<CrudController<Entity>> {
   // Build the @Crud() decorator options
   const crudOptions: CrudOptions = {
@@ -27,7 +29,7 @@ export function createCrudController<Entity>(
   @Crud(crudOptions)
   @Controller(options.path)
   class CrudControllerHost implements CrudController<Entity> {
-    constructor(public service: any) {}
+    constructor(public service: TypeOrmCrudService<Entity>) {}
   }
 
   // Apply guards if provided
