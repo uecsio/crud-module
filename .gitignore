@@ -5,3 +5,4 @@ dist
 *.tsbuildinfo
 coverage
 .nyc_output
+.claude
