@@ -1,6 +1,6 @@
 {
   "name": "@uecsio/nestjs-crud-module",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Dynamic CRUD module for NestJS with TypeORM, based on @dataui/crud",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "prepublishOnly": "npm run lint && npm run build && npm test"
   },
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=24.0.0",
     "npm": ">=10.0.0"
   },
   "keywords": [
