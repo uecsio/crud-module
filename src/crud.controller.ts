@@ -29,7 +29,7 @@ export function createCrudController<Entity extends ObjectLiteral>(
   @Crud(crudOptions)
   @Controller(options.path)
   class CrudControllerHost implements CrudController<Entity> {
-    constructor(@Inject(ServiceClass) public service: TypeOrmCrudService<Entity>) { }
+    constructor(@Inject(ServiceClass) public service: TypeOrmCrudService<Entity>) {}
   }
 
   // Apply guards if provided
