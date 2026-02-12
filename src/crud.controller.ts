@@ -1,4 +1,4 @@
-import { Controller, Type, UseGuards, UseFilters, UseInterceptors } from '@nestjs/common';
+import { Controller, Type, UseGuards, UseFilters, UseInterceptors, Inject } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@dataui/crud';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { ObjectLiteral } from 'typeorm';
@@ -29,7 +29,7 @@ export function createCrudController<Entity extends ObjectLiteral>(
   @Crud(crudOptions)
   @Controller(options.path)
   class CrudControllerHost implements CrudController<Entity> {
-    constructor(public service: TypeOrmCrudService<Entity>) {}
+    constructor(@Inject(ServiceClass) public service: TypeOrmCrudService<Entity>) {}
   }
 
   // Apply guards if provided
