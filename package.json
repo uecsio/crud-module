@@ -57,7 +57,7 @@
     "rxjs": "^7.8.1",
     "ts-jest": "^29.1.0",
     "typeorm": "^0.3.26",
-    "typescript": "^5.0.0"
+    "typescript": "^6.0.2"
   },
   "files": [
     "dist",
