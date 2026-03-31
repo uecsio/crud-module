@@ -20,7 +20,7 @@ A dynamic CRUD module for NestJS with TypeORM, based on [@dataui/crud](https://g
 ## Installation
 
 ```bash
-npm install @your-org/nestjs-crud-module @dataui/crud @dataui/crud-typeorm @nestjs/typeorm typeorm class-validator class-transformer
+npm install @uecsio/nestjs-crud-module @dataui/crud @dataui/crud-typeorm @nestjs/typeorm typeorm class-validator class-transformer
 ```
 
 ## Quick Start
@@ -127,7 +127,7 @@ CrudModule.register({
   updateDto: UpdateUserDto,
   guards: [JwtAuthGuard],
   filters: [HttpExceptionFilter],
-})
+});
 ```
 
 ### With Custom CRUD Options
@@ -157,7 +157,7 @@ CrudModule.register({
       },
     },
   },
-})
+});
 ```
 
 ### Limiting Routes
@@ -172,7 +172,7 @@ CrudModule.register({
   routes: {
     only: ['getManyBase', 'getOneBase', 'createOneBase'],
   },
-})
+});
 
 // Or exclude specific routes
 CrudModule.register({
@@ -183,7 +183,7 @@ CrudModule.register({
   routes: {
     exclude: ['deleteOneBase'],
   },
-})
+});
 ```
 
 ### Registering Multiple CRUD Resources
@@ -250,7 +250,7 @@ CrudModule.register({
   service: CustomUserService,
   createDto: CreateUserDto,
   updateDto: UpdateUserDto,
-})
+});
 ```
 
 ## Query Parameters
@@ -297,19 +297,19 @@ GET /users?fields=id,name&join=profile||email
 
 ### CrudModuleOptions
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `entity` | `Type<Entity>` | Yes | TypeORM entity class |
-| `path` | `string` | Yes | Controller route path |
-| `createDto` | `Type<any>` | No | DTO for create operations |
-| `updateDto` | `Type<any>` | No | DTO for update operations |
-| `replaceDto` | `Type<any>` | No | DTO for replace operations |
-| `guards` | `Type<any>[]` | No | Guards to apply to the controller |
-| `filters` | `Type<any>[]` | No | Exception filters to apply |
-| `interceptors` | `Type<any>[]` | No | Interceptors to apply |
-| `service` | `Type<any>` | No | Custom service (must extend TypeOrmCrudService) |
-| `routes` | `object` | No | Enable/disable specific routes |
-| `crudOptions` | `CrudOptions` | No | Additional @dataui/crud options |
+| Property       | Type           | Required | Description                                     |
+| -------------- | -------------- | -------- | ----------------------------------------------- |
+| `entity`       | `Type<Entity>` | Yes      | TypeORM entity class                            |
+| `path`         | `string`       | Yes      | Controller route path                           |
+| `createDto`    | `Type<any>`    | No       | DTO for create operations                       |
+| `updateDto`    | `Type<any>`    | No       | DTO for update operations                       |
+| `replaceDto`   | `Type<any>`    | No       | DTO for replace operations                      |
+| `guards`       | `Type<any>[]`  | No       | Guards to apply to the controller               |
+| `filters`      | `Type<any>[]`  | No       | Exception filters to apply                      |
+| `interceptors` | `Type<any>[]`  | No       | Interceptors to apply                           |
+| `service`      | `Type<any>`    | No       | Custom service (must extend TypeOrmCrudService) |
+| `routes`       | `object`       | No       | Enable/disable specific routes                  |
+| `crudOptions`  | `CrudOptions`  | No       | Additional @dataui/crud options                 |
 
 ## Testing
 

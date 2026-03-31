@@ -1,4 +1,4 @@
-import { Controller, Type, UseGuards, UseFilters, UseInterceptors, Inject } from '@nestjs/common';
+import { Controller, Type, UseGuards, UseFilters, Inject } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@dataui/crud';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { ObjectLiteral } from 'typeorm';
@@ -11,6 +11,16 @@ export function createCrudController<Entity extends ObjectLiteral>(
   options: CrudModuleOptions<Entity>,
   ServiceClass: Type<TypeOrmCrudService<Entity>>,
 ): Type<CrudController<Entity>> {
+  // Build per-route interceptors config
+  const routesWithInterceptors: Record<string, { interceptors: any[] }> = {};
+  if (options.interceptors) {
+    for (const [routeName, interceptors] of Object.entries(options.interceptors)) {
+      if (interceptors && interceptors.length > 0) {
+        routesWithInterceptors[routeName] = { interceptors };
+      }
+    }
+  }
+
   // Build the @Crud() decorator options
   const crudOptions: CrudOptions = {
     model: {
@@ -21,7 +31,10 @@ export function createCrudController<Entity extends ObjectLiteral>(
       update: options.updateDto,
       replace: options.replaceDto,
     },
-    routes: options.routes,
+    routes: {
+      ...options.routes,
+      ...routesWithInterceptors,
+    },
     ...options.crudOptions,
   };
 
@@ -40,11 +53,6 @@ export function createCrudController<Entity extends ObjectLiteral>(
   // Apply filters if provided
   if (options.filters && options.filters.length > 0) {
     UseFilters(...options.filters)(CrudControllerHost);
-  }
-
-  // Apply interceptors if provided
-  if (options.interceptors && options.interceptors.length > 0) {
-    UseInterceptors(...options.interceptors)(CrudControllerHost);
   }
 
   return CrudControllerHost;
