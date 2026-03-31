@@ -40,9 +40,9 @@ export interface CrudModuleOptions<Entity extends ObjectLiteral = ObjectLiteral>
   filters?: Array<Type<ExceptionFilter>>;
 
   /**
-   * Interceptors to apply to CRUD controller
+   * Interceptors to apply to specific CRUD routes
    */
-  interceptors?: Array<Type<NestInterceptor>>;
+  interceptors?: Partial<Record<CrudRouteName, Array<Type<NestInterceptor>>>>;
 
   /**
    * Controller route path

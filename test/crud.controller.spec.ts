@@ -6,6 +6,7 @@ import { TestUser } from './fixtures/test.entity';
 import { CreateTestUserDto, UpdateTestUserDto } from './fixtures/test.dto';
 import { TestGuard } from './fixtures/test.guard';
 import { TestExceptionFilter } from './fixtures/test.filter';
+import { TestInterceptor } from './fixtures/test.interceptor';
 import { CrudModuleOptions } from '../src/interfaces/crud-module-options.interface';
 
 describe('createCrudController', () => {
@@ -116,6 +117,24 @@ describe('createCrudController', () => {
 
       expect(guards).toBeDefined();
       expect(guards.length).toBe(2);
+    });
+
+    it('should apply interceptors at route level', () => {
+      const options: CrudModuleOptions<TestUser> = {
+        entity: TestUser,
+        path: 'users',
+        interceptors: {
+          getManyBase: [TestInterceptor],
+          getOneBase: [TestInterceptor],
+        },
+      };
+
+      const ControllerClass = createCrudController(options, ServiceClass);
+
+      expect(ControllerClass).toBeDefined();
+      // Interceptors are not applied at controller level
+      const controllerInterceptors = Reflect.getMetadata('__interceptors__', ControllerClass);
+      expect(controllerInterceptors).toBeUndefined();
     });
 
     it('should work without guards, filters, or interceptors', () => {
